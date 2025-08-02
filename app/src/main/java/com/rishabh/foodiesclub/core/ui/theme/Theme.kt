@@ -1,4 +1,4 @@
-package com.rishabh.foodiesclub.ui.theme
+package com.rishabh.foodiesclub.core.ui.theme
 
 import android.app.Activity
 import android.os.Build

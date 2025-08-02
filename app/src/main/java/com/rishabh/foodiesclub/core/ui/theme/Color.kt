@@ -1,4 +1,4 @@
-package com.rishabh.foodiesclub.ui.theme
+package com.rishabh.foodiesclub.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
