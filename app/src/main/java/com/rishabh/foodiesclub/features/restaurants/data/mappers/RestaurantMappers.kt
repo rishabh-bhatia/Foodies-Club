@@ -25,8 +25,8 @@ fun DealDto.toDomain(): Deal {
         discountPercent = discount.toIntOrNull() ?: 0,
         isDineIn = dineIn.toBoolean(),
         isLightningDeal = lightning.toBoolean(),
-        startTime = open ?: start, // Use 'open' if available, otherwise fallback to 'start'
-        endTime = close ?: end,   // Use 'close' if available, otherwise fallback to 'end'
+        startTime = open ?: start,
+        endTime = close ?: end,
         quantityLeft = qtyLeft.toIntOrNull() ?: 0
     )
 }
