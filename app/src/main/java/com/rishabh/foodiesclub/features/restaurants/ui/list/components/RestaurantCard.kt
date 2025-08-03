@@ -1,4 +1,4 @@
-package com.rishabh.foodiesclub.features.restaurants.ui.components
+package com.rishabh.foodiesclub.features.restaurants.ui.list.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -87,9 +87,10 @@ private fun RestaurantInfo(
             color = Color.Gray
         )
         Text(
-            text = cuisines.take(3).joinToString(" • "),
-            style = MaterialTheme.typography.bodyMedium,
-            color = Color.Gray
+            text = cuisines.joinToString(", "),
+            style = MaterialTheme.typography.bodySmall,
+            fontWeight = FontWeight.SemiBold,
+            color = Color.DarkGray
         )
     }
 }

@@ -1,4 +1,4 @@
-package com.rishabh.foodiesclub.features.restaurants.ui.components
+package com.rishabh.foodiesclub.features.restaurants.ui.list.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
