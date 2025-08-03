@@ -1,6 +1,7 @@
 package com.rishabh.foodiesclub.features.restaurants.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -22,10 +23,11 @@ import com.rishabh.foodiesclub.features.restaurants.domain.model.Restaurant
 @Composable
 fun RestaurantCard(
     restaurant: Restaurant,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth().clickable(onClick = onClick),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface
         ),
@@ -117,6 +119,6 @@ private fun RestaurantCardPreview() {
                 )
             )
         )
-        RestaurantCard(restaurant = sampleRestaurant)
+        RestaurantCard(restaurant = sampleRestaurant, onClick = {})
     }
 }

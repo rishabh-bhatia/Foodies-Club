@@ -25,15 +25,20 @@ import com.rishabh.foodiesclub.features.restaurants.ui.components.RestaurantCard
 
 @Composable
 fun RestaurantListScreen(
-    viewModel: RestaurantListViewModel = hiltViewModel()
+    viewModel: RestaurantListViewModel = hiltViewModel(),
+    onRestaurantClick: (String) -> Unit
 ) {
     val state by viewModel.uiState.collectAsState()
-    RestaurantListContent(state = state)
+    RestaurantListContent(
+        state = state,
+        onRestaurantClick = onRestaurantClick
+    )
 }
 
 @Composable
 private fun RestaurantListContent(
-    state: RestaurantListState
+    state: RestaurantListState,
+    onRestaurantClick: (String) -> Unit
 ) {
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -57,7 +62,10 @@ private fun RestaurantListContent(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 items(state.restaurants) { restaurant ->
-                    RestaurantCard(restaurant = restaurant)
+                    RestaurantCard(
+                        restaurant = restaurant,
+                        onClick = { onRestaurantClick(restaurant.id) }
+                    )
                 }
             }
         }
@@ -93,7 +101,8 @@ private fun RestaurantListScreenSuccessPreview() {
             state = RestaurantListState(
                 isLoading = false,
                 restaurants = listOf(sampleRestaurant, sampleRestaurant)
-            )
+            ),
+            onRestaurantClick = {}
         )
     }
 }

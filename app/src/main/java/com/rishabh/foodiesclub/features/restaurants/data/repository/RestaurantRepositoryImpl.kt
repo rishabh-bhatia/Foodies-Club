@@ -10,16 +10,31 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
+import javax.inject.Singleton
 
+// A better implementation could use a StateFlow to get data once and let everyone collect it.
+// Ideal solution would be to use Room as a single source
+// of truth, providing offline support as well.
+@Singleton
 class RestaurantRepositoryImpl @Inject constructor(
     private val apiService: RestaurantApiService
 ) : RestaurantRepository {
+
+    private var cachedRestaurants: List<Restaurant>? = null
+
     override fun getRestaurants(): Flow<Resource<List<Restaurant>>> = flow {
         emit(Resource.Loading())
 
+        if (cachedRestaurants != null) {
+            emit(Resource.Success(cachedRestaurants!!))
+            return@flow
+        }
+
         try {
             val response = apiService.getRestaurants()
-            emit(Resource.Success(response.restaurants.map { it.toDomain() }))
+            val restaurants = response.restaurants.map { it.toDomain() }
+            cachedRestaurants = restaurants
+            emit(Resource.Success(restaurants))
         } catch (e: HttpException) {
             emit(Resource.Error("Something went wrong on the server. Please try again later."))
         } catch (e: IOException) {
