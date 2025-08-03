@@ -10,9 +10,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,31 +30,41 @@ class RestaurantDetailViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Fetches the details for a specific restaurant from the repository, sorts the deals,
+     * and updates the UI state.
+     * @param restaurantId The unique ID of the restaurant to fetch.
+     */
     private fun fetchRestaurantDetails(restaurantId: String) {
-        getRestaurantDetailsUseCase(restaurantId).onEach { result ->
-            when (result) {
-                is Resource.Loading -> {
-                    _uiState.update { it.copy(isLoading = true) }
-                }
-                is Resource.Success -> {
-                    _uiState.update {
-                        it.copy(
-                            isLoading = false,
-                            restaurant = result.data,
-                            error = null
-                        )
+        viewModelScope.launch {
+            getRestaurantDetailsUseCase(restaurantId).collect { result ->
+                when (result) {
+                    is Resource.Loading -> {
+                        _uiState.update { it.copy(isLoading = true) }
                     }
-                }
-                is Resource.Error -> {
-                    _uiState.update {
-                        it.copy(
-                            isLoading = false,
-                            error = result.message
-                        )
+                    is Resource.Success -> {
+                        val sortedRestaurant = result.data?.let { restaurant ->
+                            restaurant.copy(deals = restaurant.deals.sortedByDescending { it.discountPercent })
+                        }
+                        _uiState.update {
+                            it.copy(
+                                isLoading = false,
+                                restaurant = sortedRestaurant,
+                                error = null
+                            )
+                        }
+                    }
+                    is Resource.Error -> {
+                        _uiState.update {
+                            it.copy(
+                                isLoading = false,
+                                error = result.message
+                            )
+                        }
                     }
                 }
             }
-        }.launchIn(viewModelScope)
+        }
     }
 }
 
