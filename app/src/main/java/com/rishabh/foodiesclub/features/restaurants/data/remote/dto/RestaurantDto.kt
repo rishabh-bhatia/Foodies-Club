@@ -11,7 +11,7 @@ data class RestaurantDto(
     @Json(name = "suburb") val suburb: String,
     @Json(name = "cuisines") val cuisines: List<String>,
     @Json(name = "imageLink") val imageLink: String,
-    @Json(name = "open") val open: String,
-    @Json(name = "close") val close: String,
+    @Json(name = "open") val open: String?,
+    @Json(name = "close") val close: String?,
     @Json(name = "deals") val deals: List<DealDto>
 )

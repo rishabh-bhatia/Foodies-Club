@@ -7,7 +7,7 @@ data class Restaurant(
     val suburb: String,
     val cuisines: List<String>,
     val imageUrl: String,
-    val openTime: String,
-    val closeTime: String,
+    val openTime: String?,
+    val closeTime: String?,
     val deals: List<Deal>
 )

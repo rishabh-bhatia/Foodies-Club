@@ -5,7 +5,7 @@ data class Deal(
     val discountPercent: Int,
     val isDineIn: Boolean,
     val isLightningDeal: Boolean,
-    val startTime: String,
-    val endTime: String,
+    val startTime: String?,
+    val endTime: String?,
     val quantityLeft: Int
 )

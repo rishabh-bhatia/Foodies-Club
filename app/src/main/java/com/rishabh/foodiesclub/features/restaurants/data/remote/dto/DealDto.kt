@@ -9,7 +9,9 @@ data class DealDto(
     @Json(name = "discount") val discount: String,
     @Json(name = "dineIn") val dineIn: String,
     @Json(name = "lightning") val lightning: String,
-    @Json(name = "open") val open: String,
-    @Json(name = "close") val close: String,
+    @Json(name = "open") val open: String?,
+    @Json(name = "close") val close: String?,
+    @Json(name = "start") val start: String?,
+    @Json(name = "end") val end: String?,
     @Json(name = "qtyLeft") val qtyLeft: String
 )
