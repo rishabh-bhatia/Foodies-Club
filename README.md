@@ -42,12 +42,9 @@ The application follows a clean, feature-based architecture that separates conce
 
 The project includes unit tests for the ViewModel layer to ensure the business logic and state management work as expected.
 
-*   **Frameworks Used:** JUnit and [MockK](https://mockk.io/) (the standard for Kotlin).
+*   **Frameworks Used:** JUnit and MockK.
 *   **What's Tested:** The `RestaurantListViewModel` is tested to verify that the search and sorting logic correctly filters and orders the list of restaurants.
-*   **How to Run:** To run the unit tests, execute the following command in your terminal at the project root:
-    ```bash
-    ./gradlew testDebugUnitTest
-    ```
+*   **How to Run:** Right-click the `test` directory in the `app` module and select "Run 'Tests'". 
 
 *Note: UI (Compose) tests and integration tests for the data layer were planned but have been omitted to keep the project within the challenge's time scope.*
 
