@@ -4,8 +4,8 @@ This is an Android application built as a technical challenge for the Senior And
 
 ## 📸 Screenshots
 
-| Restaurant List Screen | Restaurant Detail Screen |
-| :---: | :---: |
+|             Restaurant List Screen              |              Restaurant Detail Screen               |
+|:-----------------------------------------------:|:---------------------------------------------------:|
 | ![Restaurant List](screenshots/list_screen.png) | ![Restaurant Detail](screenshots/detail_screen.png) |
 
 ## ✨ Features
